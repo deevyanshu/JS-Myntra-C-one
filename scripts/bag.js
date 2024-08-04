@@ -14,13 +14,20 @@ function displayBagSummary()
   let totalMRP=0;
   let totalDiscount=0;
   let finalPayment=0;
+  const convenienceFee=99;  
 
   bagItemsObjects.forEach(bagItem=>{
     totalMRP+=bagItem.original_price;
     totalDiscount+=bagItem.original_price-bagItem.current_price;
   })
 
-  finalPayment=totalMRP-totalDiscount+99;
+  if(totalMRP-totalDiscount>0){
+      finalPayment=totalMRP-totalDiscount+convenienceFee;    
+  }else 
+  {
+      finalPayment=0;
+  }
+  
 
   bagSummaryElemnt.innerHTML=`<div class="bag-details-container">
   <div class="price-header">PRICE DETAILS (${totalItem} items) </div>
